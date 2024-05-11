@@ -18,24 +18,30 @@ const styles = StyleSheet.create({
   textRegular: {
     fontSize: 12,
     fontWeight: "400",
+    color: "rgba(238, 245, 255, 1)",
   },
   textBold: {
     fontSize: 12,
     fontWeight: "600",
+    color: "rgba(238, 245, 255, 1)",
   },
 });
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View style={styles.container} className="item-center justify-center gap-2">
+    <View style={styles.container}>
       <Image
         source={icon}
         resizeMode="contain"
+        style={{ ...styles.icon, tintColor: color }}
         tintColor={color}
         className="w-6 h-6"
       />
       <Text
         className={`${focused ? "font-psemibold" : "font-pregular"}text-xs`}
+        style={{
+          color: focused ? "rgba(134, 182, 246, 1)" : "rgba(238, 245, 255, 1)",
+        }}
       >
         {name}
       </Text>
@@ -46,7 +52,19 @@ const TabIcon = ({ icon, color, name, focused }) => {
 const TabsLayout = () => {
   return (
     <>
-      <Tabs screenOptions={{ tabBarShowLabel: false }}>
+      <Tabs
+        screenOptions={{
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            backgroundColor: "rgba(180, 212, 255, 1)",
+          },
+          tabBarActiveTintColor: "rgba(134, 182, 246, 1)",
+          tabBarInactiveTintColor: "rgba(238, 245, 255, 1)",
+          borderTopColor: "transparent",
+          borderTopWidth: 1,
+          heigth: 84,
+        }}
+      >
         <Tabs.Screen
           name="home"
           options={{
@@ -57,7 +75,7 @@ const TabsLayout = () => {
                 icon={icons.home}
                 color={color}
                 name="Home"
-                focus={focused}
+                focused={focused}
               />
             ),
           }}
@@ -72,7 +90,7 @@ const TabsLayout = () => {
                 icon={icons.bookmark}
                 color={color}
                 name="History"
-                focus={focused}
+                focused={focused}
               />
             ),
           }}
@@ -87,7 +105,7 @@ const TabsLayout = () => {
                 icon={icons.plus}
                 color={color}
                 name="Ongoing"
-                focus={focused}
+                focused={focused}
               />
             ),
           }}
@@ -102,7 +120,7 @@ const TabsLayout = () => {
                 icon={icons.profile}
                 color={color}
                 name="Profile"
-                focus={focused}
+                focused={focused}
               />
             ),
           }}
